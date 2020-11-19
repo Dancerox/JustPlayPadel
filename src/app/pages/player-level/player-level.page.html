@@ -1,0 +1,78 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>
+      JustPlayPadel
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="medium">
+  <div id="container">
+
+    <div class="ion-text-underline ion-text-center">
+      <h1 class="text">Calcula tu nivel</h1>
+    </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <p class="ion-text-left">1. ¿Has jugado antes al pádel?</p>
+          <ion-radio-group [(ngModel)]="data1" value="playedbefore">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="4">
+                  <ion-item color="medium">
+                    <ion-label>Sí</ion-label>
+                    <ion-radio slot="start" value="1"></ion-radio>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                  <ion-item color="medium">
+                    <ion-label>No</ion-label>
+                    <ion-radio slot="start" value="0"></ion-radio>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-radio-group>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <p class="ion-text-left">2. ¿Cuántas veces has jugado en el último año?</p>
+          <ion-item color="medium">
+            <ion-select [(ngModel)]="data2" interface="popover">
+              <ion-select-option value="0">Menos de 5</ion-select-option>
+              <ion-select-option value="0.2">Menos de 10</ion-select-option>
+              <ion-select-option value="0.4">Menos de 30</ion-select-option>
+              <ion-select-option value="0.5">Más de 50</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <p class="ion-text-left">3. ¿Cuántas veces practicas deporte a la semana?</p>
+          <ion-item color="medium">
+            <ion-select [(ngModel)]="data3" interface="popover">
+              <ion-select-option value="0">No practico</ion-select-option>
+              <ion-select-option value="0.1">Más de 2 veces</ion-select-option>
+              <ion-select-option value="0.3">4 veces o más</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <ion-button color="primary" class="ion-text-capitalize" shape="undefined" (click)="calcularNivel()">Calcular</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  </div>
+</ion-content>

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "justplaypadel-cb3b1": {
+      "hosting": {
+        "app": [
+          "justplaypadel-cb3b1"
+        ]
+      }
+    }
+  }
+}

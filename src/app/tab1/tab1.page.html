@@ -1,0 +1,82 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>
+      JustPlayPadel
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="medium">
+
+  <div id="container">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item color="medium">
+            <ion-icon slot="start" name="mail-unread-outline"></ion-icon>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-button type="submit" (click)="authService.SignOut()" expand="block">Logout</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-item color="medium">
+            <ion-icon slot="end" name="settings-outline"></ion-icon>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="2">
+          <div>
+            <ion-avatar>
+              <img src="https://cutt.ly/sfCohjf">
+            </ion-avatar>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center ion-text-center">
+        <ion-col size="4">
+          <div>
+            <ion-label> {{ player.name }} </ion-label>
+          </div>
+          <div>
+            <ion-label>Nivel: {{ player.level }}</ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <p>Partidos creados</p>
+        </ion-col>
+        <ion-col>
+          <p>2</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <p>Partidos apuntados</p>
+        </ion-col>
+        <ion-col>
+          <p>5</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <p>Victorias</p>
+        </ion-col>
+        <ion-col>
+          <p>4</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+
+</ion-content>
+
+

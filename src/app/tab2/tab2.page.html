@@ -1,0 +1,83 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>
+      JustPlayPadel
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="medium">
+
+  <div id="container">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="ion-text-center">
+            <h1>Tus partidos</h1>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-segment color="primary" [(ngModel)]="selection" (ionChange)="segmentChanged($event)">
+          <ion-col col-3>
+            <ion-segment-button value="created">
+              <ion-label>Creados</ion-label>
+            </ion-segment-button>
+          </ion-col>
+          <ion-col col-3>
+            <ion-segment-button value="registered">
+              <ion-label>Registrados</ion-label>
+            </ion-segment-button>
+          </ion-col>
+        </ion-segment>
+      </ion-row>
+    </ion-grid>
+    
+
+    <div [ngSwitch]="selection">
+      <div *ngSwitchCase="'created'">
+        <div *ngFor="let match of matches">
+          <ion-card class="club-cards" *ngIf="(match.data.admin === '/players/' + uid)">
+            <ion-item>
+              <ion-avatar slot="start">
+                <img src="https://cutt.ly/sfCohjf">
+              </ion-avatar>
+              <ion-list slot="start">
+                <ion-label>Participantes: 1/4 {{ match.admin }}</ion-label>
+                <ion-label>Nivel medio: 3,2</ion-label>
+                <ion-label>Club Montepino</ion-label>
+              </ion-list>
+              <ion-icon slot="end" name="arrow-forward-circle-outline" color="primary" size="large" (click)="verPartido(this.match.id)"></ion-icon>
+            </ion-item>
+          </ion-card>
+        </div>
+      </div>
+    </div>
+
+    <div [ngSwitch]="selection">
+      <div *ngSwitchCase="'registered'">
+        <div *ngFor="let match of matches">
+          <ion-card class="club-cards" *ngIf="(match.data.admin != '/players/' + uid && match.data.playerone === '/players/' + uid)">
+            <ion-item>
+              <ion-avatar slot="start">
+                <img src="https://cutt.ly/sfCohjf">
+              </ion-avatar>
+              <ion-list slot="start">
+                <ion-label>Participantes: 1/4</ion-label>
+                <ion-label>Nivel medio: 3,2</ion-label>
+                <ion-label>Club Montepino</ion-label>
+              </ion-list>
+              <ion-icon slot="end" name="arrow-forward-circle-outline" color="primary" size="large" (click)="verPartido(this.match.id)"></ion-icon>
+            </ion-item>
+          </ion-card>
+        </div>
+      </div>
+    </div>
+    
+
+  </div>
+
+</ion-content>
+
+

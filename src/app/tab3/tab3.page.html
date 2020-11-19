@@ -1,0 +1,173 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>
+      JustPlayPadel
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Contenedor principal --> 
+<ion-content [fullscreen]="true" color="medium">
+
+ 
+      <div id="container">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <div class="ion-text-underline">
+                <h1 class="text ion-text-center">Organiza tu partido</h1>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+
+            <ion-segment color="primary" [(ngModel)]="type" (ionChange)="segmentChanged($event)">
+              <ion-col col-3>
+                <ion-segment-button value="hour">
+                  <ion-label>Buscar hora</ion-label>
+                </ion-segment-button>
+              </ion-col>
+              <ion-col col-3>
+                <ion-segment-button value="location">
+                  <ion-label>Buscar club</ion-label>
+                </ion-segment-button>
+              </ion-col>
+            </ion-segment>
+          
+            
+
+
+          </ion-row>
+        </ion-grid>
+        
+
+        <div [ngSwitch]="type">
+          <!-- Pestaña para buscar una hora para jugar -->
+          <ion-grid *ngSwitchCase="'hour'">
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Fecha</ion-label>
+                  <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="date" (ionChange)="validateDate()"></ion-datetime>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Hora</ion-label>
+                  <ion-datetime displayFormat="HH:mm" [(ngModel)]="time" (ionChange)="validateTime()" minuteValues="0,30"></ion-datetime>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            
+            <ion-row>
+              <ion-col>
+                <h3>Clubes</h3>
+                <ion-card>
+                  <ion-card-header (click)="toggleAccordion()" color="primary" class="ion-text-center">
+                    Filtro
+                  </ion-card-header>
+                  <ion-card-content class="filter" #accordionContent>
+                    <ion-item>
+                      <ion-range id="dual-range" pin color="dark" min="0" max="10" class="no-padding" [(ngModel)]="price" (ionChange)="validatePrice()">
+                        <ion-icon slot="start" size="small" name="logo-euro"></ion-icon>
+                        <ion-icon slot="end" name="logo-euro"></ion-icon>
+                      </ion-range>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label>Km</ion-label>
+                      <ion-range id="dual-range" pin color="dark" min="0" max="3000" class="no-padding">
+                        <ion-icon slot="start" size="small" name="infinite"></ion-icon>
+                        <ion-icon slot="end"></ion-icon>
+                      </ion-range>
+                    </ion-item>
+                    <ion-item>
+                      <ion-range id="dual-range" pin color="dark" min="1" max="5" class="no-padding" [(ngModel)]="stars" (ionChange)="validateStars()">
+                        <ion-icon slot="start" size="small" name="star"></ion-icon>
+                        <ion-icon slot="end"></ion-icon>
+                      </ion-range>
+                    </ion-item>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngFor="let club of clubs">
+              <ion-col *ngIf="(club.data.stars <= stars && club.data.price <= price)">
+                <ion-card class="club-cards" (click)="verClub(club.id)">
+                  <img [src]="club.data.url" />
+                  <ion-card-header>
+                    <ion-card-title class="ion-text-center">{{ club.data.name }}</ion-card-title>
+                    <ion-card-subtitle class="ion-text-center">{{ club.data.location }}</ion-card-subtitle>
+                    <ion-row>
+                      <ion-col class="ion-text-center">
+                        <ion-icon name="star" *ngFor="let n of numSequence(club.data.stars)"></ion-icon>
+                      </ion-col>
+                    </ion-row>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label>Precio: {{ club.data.price }}€/h</ion-label>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label>Teléfono: {{ club.data.phone }}</ion-label>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      
+          <!-- Pestaña para buscar el club -->
+          <ion-grid *ngSwitchCase="'location'">
+            <ion-searchbar placeholder="Club" (ionInput)="filterList($event)"></ion-searchbar>
+
+
+            <ion-row *ngFor="let club of clubs">
+              <ion-col>
+                <ion-card class="club-cards" (click)="verClub(club.id)">
+                  <img [src]="club.data.url" />
+                  <ion-card-header>
+                    <ion-card-title class="ion-text-center">{{ club.data.name }}</ion-card-title>
+                    <ion-card-subtitle class="ion-text-center">{{ club.data.location }}</ion-card-subtitle>
+                    <ion-row>
+                      <ion-col class="ion-text-center">
+                        <ion-icon name="star" *ngFor="let n of numSequence(club.data.stars)"></ion-icon>
+                      </ion-col>
+                    </ion-row>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label>Precio: {{ club.data.price }}€/h</ion-label>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label>Tlfn: {{ club.data.phone }}</ion-label>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+        
+        
+        
+      </div>
+  
+
+</ion-content>

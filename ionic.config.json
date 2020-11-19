@@ -1,0 +1,7 @@
+{
+  "name": "justplaypadel",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>
+      JustPlayPadel
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="medium">
+  <div id="container">
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="1">
+            <ion-buttons>
+              <ion-back-button defaultHref="/match-creation"></ion-back-button>
+            </ion-buttons>
+        </ion-col>
+        <ion-col size="10">
+          <div class="ion-text-underline">
+            <h1 class="text ion-text-center">Confirmación de reserva</h1>
+          </div>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <p>Cub: {{ this.clubName }}</p>
+          <p>Fecha de reserva: {{ this.date }}</p>
+          <p>Hora de reserva: {{ this.time }}</p>
+          <p>Duración de partido: {{ this.duration }} mins.</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <ion-button color="primary" class="ion-text-capitalize ion-text-center" (click)="verPartido()">
+            Confirmar reserva
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+</ion-content>

@@ -1,0 +1,86 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>
+      JustPlayPadel
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="medium">
+  <div id="container">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="1">
+            <ion-buttons>
+              <ion-back-button defaultHref="/"></ion-back-button>
+            </ion-buttons>
+        </ion-col>
+        <ion-col size="10">
+          <div class="ion-text-underline">
+            <h1 class="text ion-text-center">Reserva tu pista</h1>
+          </div>
+        </ion-col>
+        <ion-col size="1"></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <img [src]="club.url" class="banner-club" />
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="ion-text-left">
+          <h1>{{ club.name }}</h1>
+          <p>Precio: {{ club.price }} €/h</p>
+          <p>Dirección: {{ club.location }}</p>
+          <p>Teléfono: {{ club.phone }}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Fecha</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="date" (ionChange)="validateDate()"></ion-datetime>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>Hora</ion-label>
+            <ion-datetime displayFormat="HH:mm" [(ngModel)]="time" (ionChange)="validateTime()" minuteValues="0,30"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8">
+          <ion-item>
+            <ion-label>Duración (min.)</ion-label>
+            <ion-input placeholder="placeholder" value="0" class="ion-text-right" [(ngModel)]="duration"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="2">
+          <ion-item color="medium">
+            <ion-icon name="remove-circle" (click)="decrement()"></ion-icon>
+          </ion-item>
+        </ion-col>
+        <ion-col size="2">
+          <ion-item color="medium">
+            <ion-icon name="add-circle" (click)="increment()"></ion-icon>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <h2>Pistas disponibles</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let court of courts">
+        <ion-col>
+          <ion-card (click)="verReserva($event, values)">
+            <ion-card-header class="ion-text-left">
+              {{ court.data.name }}
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

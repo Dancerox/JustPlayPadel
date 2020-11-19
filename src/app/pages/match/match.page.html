@@ -1,0 +1,136 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>
+      JustPlayPadel
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="medium">
+  <div id="container">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="2">
+          <ion-buttons>
+            <ion-back-button defaultHref="/tabs"></ion-back-button>
+          </ion-buttons>
+        </ion-col>
+        <ion-col size="8">
+          <div class="ion-text-underline">
+            <h1 class="text ion-text-center">Partido</h1>
+          </div>
+        </ion-col>
+        <ion-col size="2">
+          <ion-item color="medium" *ngIf="match.admin === '/players/' + uid; else nodeletealert">
+            <ion-icon name="information-circle-outline" (click)="MatchInfo()"></ion-icon>
+          </ion-item>
+          <ng-template #nodeletealert>
+            <ion-item color="medium">
+              <ion-icon name="information-circle-outline" (click)="MatchInfoNoDeleteOption()"></ion-icon>
+            </ion-item>
+          </ng-template>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item color="medium">
+            <ion-label>Enviar mensaje</ion-label>
+            <ion-icon name="send" slot="end" (click)="openChat()"></ion-icon>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <ion-item (click)="presentAlertUserInfo(this.player.name)">
+              <ion-avatar slot="start">
+                <img src="https://cutt.ly/sfCohjf">
+              </ion-avatar>
+              <ion-label>{{ player.name }}</ion-label>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <div *ngIf="match.playerone != '';else noregisteredyet ">
+            <ng-container *ngIf="match.playerone != '/players/' + this.uid;else youCanDelete">
+              <ion-card>
+                <ion-item (click)="presentAlertUserInfo(this.playerone.name)">
+                  <ion-label>{{ playerone.name }}</ion-label>
+                  <ion-avatar slot="end">
+                    <img src="https://cutt.ly/sfCohjf">
+                  </ion-avatar>
+                </ion-item>
+              </ion-card>
+            </ng-container>
+          </div>
+          <ng-template #youCanDelete>
+            <ion-card>
+              <ion-item (click)="presentAlertUserInfoWithDelete()">
+                <ion-label>{{ playerone.name }}</ion-label>
+                <ion-avatar slot="end" >
+                  <img src="https://cutt.ly/sfCohjf">
+                </ion-avatar>
+              </ion-item>
+            </ion-card>
+          </ng-template>
+          <ng-template #noregisteredyet>
+            <ion-card>
+              <ion-item (click)="setPlayerone()">
+                <ion-label></ion-label>
+                <ion-avatar slot="end" >
+                  <img src="https://incresc.com/images/incresc/fondo_sin_imagen_perfil_usuario.png">
+                </ion-avatar>
+              </ion-item>
+            </ion-card>
+          </ng-template>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <ion-item>
+              <ion-avatar slot="start">
+                <img src="https://incresc.com/images/incresc/fondo_sin_imagen_perfil_usuario.png">
+              </ion-avatar>
+              <ion-label></ion-label>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-item (click)="presentAlertUserInfo()">
+              <ion-label></ion-label>
+              <ion-avatar slot="end">
+                <img src="https://incresc.com/images/incresc/fondo_sin_imagen_perfil_usuario.png">
+              </ion-avatar>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item color="medium">
+            <ion-label slot="start">Requisitos</ion-label>
+            <ion-toggle slot="start" name="requisitos" checked></ion-toggle>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+    <ion-card color="medium">
+      <ion-item color="medium">
+        <ion-label slot="start">Nivel del jugador</ion-label>
+        <ion-range id="dual-range" dual-knobs pin color="primary" min="0" max="10" class="no-padding">
+          <ion-icon slot="start" size="small"></ion-icon>
+          <ion-icon slot="end"></ion-icon>
+        </ion-range>
+      </ion-item>
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>
+      JustPlayPadel
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="medium">
+  <div id="container">
+
+    <div class="ion-text-underline ion-text-center">
+      <h1 class="text">Completa el registro</h1>
+      <p>¡Enhorabuena! Tu nivel es: {{ level }}</p>
+    </div>
+
+    <form>     
+      <ion-item lines="full" color="medium">
+        <ion-label position="floating">Name</ion-label>
+        <ion-input type="text" #name required></ion-input>
+      </ion-item> 
+
+      <ion-item lines="full" color="medium">
+        <ion-label>Fecha de nacimiento</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" #date required></ion-datetime>
+      </ion-item>
+
+      <ion-row>
+        <ion-col> 
+        <ion-button type="submit" expand="block" (click)="addPlayer(name.value, level)">Entrar</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+  </div>
+
+</ion-content>

@@ -1,0 +1,21 @@
+<ion-card>
+  <ion-card-header (click)="toggleAccordion()" color="primary">
+    Filtro
+  </ion-card-header>
+  <ion-card-content #accordionContent>
+    <ion-item>
+      <ion-label>Precio</ion-label>
+      <ion-range id="dual-range" dual-knobs pin color="dark" min="0" max="20" class="no-padding">
+        <ion-icon slot="start" size="small" name="logo-euro"></ion-icon>
+        <ion-icon slot="end" name="logo-euro"></ion-icon>
+      </ion-range>
+    </ion-item>
+    <ion-item>
+      <ion-label>Precio</ion-label>
+      <ion-range id="dual-range" dual-knobs pin color="dark" min="0" max="20" class="no-padding">
+        <ion-icon slot="start" size="small" name="logo-euro"></ion-icon>
+        <ion-icon slot="end" name="logo-euro"></ion-icon>
+      </ion-range>
+    </ion-item>
+  </ion-card-content>
+</ion-card>
